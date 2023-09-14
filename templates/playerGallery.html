@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Gallery</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="../static/assets/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/assets/modules/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="../static/assets/modules/chocolat/dist/css/chocolat.css">
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="../static/assets/modules/jqvmap/dist/jqvmap.min.css">
+  <link rel="stylesheet" href="../static/assets/modules/weather-icon/css/weather-icons.min.css">
+  <link rel="stylesheet" href="../static/assets/modules/weather-icon/css/weather-icons-wind.min.css">
+  <link rel="stylesheet" href="../static/assets/modules/summernote/summernote-bs4.css">
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="../static/assets/css/style.css">
+  <link rel="stylesheet" href="../static/assets/css/components.css">
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+</script>
+<!-- /END GA --></head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+          </ul>
+          <div class="search-element">
+            
+            
+          </div>
+        </form>
+        <ul class="navbar-nav navbar-right">
+          
+          <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+            <img alt="image" src="../static/pictures/profile/{{profileP}}" class="rounded-circle mr-1" style="width:41px;height:40px;">
+            <div class="d-sm-none d-lg-inline-block">Hi, {{user}}</div></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              
+              <div class="dropdown-divider"></div>
+              <a href="{{url_for('logout')}}" class="dropdown-item has-icon text-danger">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="index.html">Scout Systen</a>
+          </div>
+          <div class="sidebar-brand sidebar-brand-sm">
+            <a href="index.html">St</a>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
+            <li class="dropdown active">
+              <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+              <ul class="dropdown-menu">
+                <!-- if scout status -->
+                {%if status== 'scout'%}
+                <li ><a class="nav-link" href="{{url_for('scoutNewPlayer')}}">New Player</a></li>
+                <li><a class="nav-link" href="{{url_for('scoutPlayer')}}">Players</a></li>
+                {%elif status=='admin'%}
+                <li ><a class="nav-link" href="{{url_for('adminActivateAC')}}">New Accounts</a></li>
+                <li><a class="nav-link" href="{{url_for('admin_allPLayers')}}">Players</a></li>
+                <li><a class="nav-link" href="{{url_for('admin_allScout')}}">Scouts</a></li>
+                <li><a class="nav-link" href="{{url_for('admin_allClub')}}">Team</a></li>
+                {%elif status=='player'%}
+                <li class="active"><a class="nav-link" href="#">Player Profile</a></li>
+                <li ><a class="nav-link" href="{{url_for('PlayerDealList')}}">Deal History</a></li>
+                {%elif status=='club'%}
+                <li><a class="nav-link" href="{{url_for('clubDealList')}}">Deal History</a></li>
+                {%endif%}
+                {%if status != 'player'%}
+                <li ><a class="nav-link" href="{{url_for('availablePlayer')}}">Available Player</a></li>
+                {%endif%}
+              </ul>
+            </li>
+            {%if status=='player'%}
+            <li class="dropdown ">
+              <a href="{{url_for('playerupdate',email=c_email)}}" class="nav-link"><i class="fas fa-cog"></i><span>Edit Profile</span></a>
+            </li>
+            {%elif status=='scout'%}
+            <li class="dropdown ">
+              <a href="{{url_for('update_scout',email=c_email)}}" class="nav-link"><i class="fas fa-cog"></i><span>Edit Profile</span></a>
+            </li>
+            {%elif status=='admin'%}
+            <li class="dropdown ">
+              <a href="{{url_for('update_admin',email=c_email)}}" class="nav-link"><i class="fas fa-cog"></i><span>Edit Profile</span></a>
+            </li>
+            {%endif%}
+          </ul>
+        </aside>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <h1>Gallery</h1>
+          </div>
+          
+          <div class="section-body">
+            <!-- <h2 class="section-title">Cards</h2>
+            <p class="section-lead">
+              cards provide a flexible and extensible content container with multiple variants and options.
+            </p> -->
+
+            <!-- usable one -->
+          
+
+            <div class="row sortable-card">
+              <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>HighLight</h4>
+                  </div>
+                  <div class="card-body">
+                    <video src="../static/video/{{vid.name}}" height="200px"  controls muted playsinline>
+                      Your browser does not support the video tag.
+                  </video>
+                  </div>
+                </div>
+              </div>
+              {%for i in photos%}
+
+              <div class="col-12 col-md-6 col-lg-4">
+                
+                <div>
+                  <div class="chocolat-parent p-2">
+                    <a href="../static/pictures/posting/{{i.name}}" class="chocolat-image" title="{{i.names}}">
+                      
+                      <div data-crop-image="170">
+                        <img alt="image" src="../static/pictures/posting/{{i.name}}" style="min-height:170px;" class="img-fluid">
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {%endfor%}
+            </div>
+          </div>
+
+        </section>
+      </div>
+      <footer class="main-footer">
+        <div class="footer-left">
+          Copyright &copy; <span id="theYear"></span>
+          <script>document.getElementById('theYear').innerHTML= new Date().getFullYear()</script>
+        </div>
+        <div class="footer-right">
+          
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="../static/assets/modules/jquery.min.js"></script>
+  <script src="../static/assets/modules/popper.js"></script>
+  <script src="../static/assets/modules/tooltip.js"></script>
+  <script src="../static/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../static/assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="../static/assets/modules/moment.min.js"></script>
+  <script src="../static/assets/js/stisla.js"></script>
+  
+  <!-- JS Libraies -->
+  <script src="../static/assets/modules/simple-weather/jquery.simpleWeather.min.js"></script>
+  <script src="../static/assets/modules/chart.min.js"></script>
+  <script src="../static/assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
+  <script src="../static/assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+  <script src="../static/assets/modules/summernote/summernote-bs4.js"></script>
+  <script src="../static/assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="../static/assets/js/page/index-0.js"></script>
+  <script src="../static/assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+  <script src="../static/assets/modules/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Template JS File -->
+  <script src="../static/assets/js/scripts.js"></script>
+  <script src="../static/assets/js/custom.js"></script>
+  <script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
+
+  
+ 
+</body>
+</html>

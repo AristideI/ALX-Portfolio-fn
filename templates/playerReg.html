@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Register</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="../static/assets/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/assets/modules/fontawesome/css/all.min.css">
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="../static/assets/modules/jquery-selectric/selectric.css">
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="../static/assets/css/style.css">
+  <link rel="stylesheet" href="../static/assets/css/components.css">
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+</script>
+<!-- /END GA -->
+<style>
+  body{
+    background-image:url('../static/player-bg.png');
+    background-repeat:no-repeat;
+    background-size:cover;
+    position: relative;
+  }
+  .under-bg{
+    min-width:100%;
+    min-height: 100%;
+    background-color: black;
+    position:absolute;
+    top: -49px;
+    bottom: -1px;
+    opacity:0.5;
+  }
+</style>
+</head>
+
+<body>
+  <div class="under-bg"></div>
+  <div id="app">
+    <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+            <div class="login-brand">
+              <img src="../static/assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
+            </div>
+
+            <div class="card card-primary my-b-radius">
+              <div class="card-header"><h4>Player Register</h4>
+                {%for msg in get_flashed_messages()%} {% if 'successfully' in msg%}
+                <span style="color:green; margin-left:5px;">{{msg}}</span>{%else%}
+                <span style="color: red;">{{msg}}</span>
+                {%endif%} {%endfor%}
+              </div>
+
+              <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label for="frist_name">Names</label>
+                      <input id="frist_name" type="text" class="form-control" name="names" autofocus required>
+                    </div>
+                    <div class="form-group col-6">
+                      <label for="last_name">Phone</label>
+                      <input id="last_name" type="text" class="form-control" name="phone"  required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" class="form-control" name="email"  required>
+                    <div class="invalid-feedback">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label for="password" class="d-block">Password</label>
+                      <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  required>
+                      <div id="pwindicator" class="pwindicator">
+                        <div class="bar"></div>
+                        <div class="label"></div>
+                      </div>
+                    </div>
+                    <div class="form-group col-6">
+                      <label for="password2" class="d-block">Password Confirmation</label>
+                      <input id="password2" type="password" class="form-control" name="password-confirm"  required>
+                    </div>
+                  </div>
+
+                  <div class="form-divider"></div>
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label>Nationality</label>
+                      <input id="nationality" type="text" class="form-control" name="nationality"  required>
+                    </div>
+                    <div class="form-group col-6">
+                      <label>Date of Birth</label>
+                      <input id="dob" type="date" class="form-control" name="dob"  required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">Profile Picture</label>
+                    <input id="picture" type="file" class="form-control" name="picture" accept=".jpg,.png,.jpeg"  required>
+                    <div class="invalid-feedback">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label>Height (cm)</label>
+                      <input type="number" class="form-control" name="height"  required>
+                    </div>
+                    <div class="form-group col-6">
+                      <label>Weight (Kg)</label>
+                      <input type="number" class="form-control" name="weight" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">Player Position</label>
+                    <input id="position" type="text" class="form-control" name="position"  required>
+                    <div class="invalid-feedback">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label for="scout_name">Scout Names</label>
+                      <input id="scout_name" type="text" class="form-control" name="scoutNames" required>
+                    </div>
+                    <div class="form-group col-6">
+                      <label for="scoutemail">Scout Email</label>
+                      <input id="scoutemail" type="email" class="form-control" name="scoutemail"  required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" name="agree" class="custom-control-input" id="agree" required>
+                      <label class="custom-control-label" for="agree">I agree with the terms and conditions</label>
+                    </div>
+                  </div>
+
+                  <div class="form-group" style="display:flex; justify-content:space-between ;align-items:end">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                      Register
+                    </button>
+
+                    <a href="{{url_for('playerLogin')}}">Already Registered ?</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="simple-footer">
+              Copyright &copy; Scout <span id="footerDate"></span>
+                <script>document.getElementById('footerDate').innerHTML=new Date().getFullYear()</script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="../static/assets/modules/jquery.min.js"></script>
+  <script src="../static/assets/modules/popper.js"></script>
+  <script src="../static/assets/modules/tooltip.js"></script>
+  <script src="../static/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../static/assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="../static/assets/modules/moment.min.js"></script>
+  <script src="../static/assets/js/stisla.js"></script>
+  
+  <!-- JS Libraies -->
+  <script src="../static/assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
+  <script src="../static/assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="../static/assets/js/page/auth-register.js"></script>
+  
+  <!-- Template JS File -->
+  <script src="../static/assets/js/scripts.js"></script>
+  <script src="../static/assets/js/custom.js"></script>
+</body>
+</html>

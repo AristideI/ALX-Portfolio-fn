@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>{{admin.names}} - Update</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="../static/assets/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/assets/modules/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="../static/assets/modules/chocolat/dist/css/chocolat.css">
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="../static/assets/modules/jqvmap/dist/jqvmap.min.css">
+  <link rel="stylesheet" href="../static/assets/modules/weather-icon/css/weather-icons.min.css">
+  <link rel="stylesheet" href="../static/assets/modules/weather-icon/css/weather-icons-wind.min.css">
+  <link rel="stylesheet" href="../static/assets/modules/summernote/summernote-bs4.css">
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="../static/assets/css/style.css">
+  <link rel="stylesheet" href="../static/assets/css/components.css">
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+</script>
+<!-- /END GA --></head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+          </ul>
+          <div class="search-element">
+            
+            
+          </div>
+        </form>
+        <ul class="navbar-nav navbar-right">
+          
+          <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+            <img alt="image" src="../static/pictures/profile/{{profileP}}" class="rounded-circle mr-1" style="width:41px;height:40px;">
+            <div class="d-sm-none d-lg-inline-block">Hi, {{user}}</div></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              
+              <div class="dropdown-divider"></div>
+              <a href="{{url_for('logout')}}" class="dropdown-item has-icon text-danger">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+            <div class="sidebar-brand">
+              <a href="index.html">Scout Systen</a>
+            </div>
+            <div class="sidebar-brand sidebar-brand-sm">
+              <a href="index.html">St</a>
+            </div>
+            <ul class="sidebar-menu">
+              <li class="menu-header">Dashboard</li>
+              <li class="dropdown active">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+                <ul class="dropdown-menu">
+                  <li ><a class="nav-link" href="{{url_for('adminActivateAC')}}">New Accounts</a></li>
+                  <li><a class="nav-link" href="{{url_for('admin_allPLayers')}}">Players</a></li>
+                  <li><a class="nav-link" href="{{url_for('admin_allScout')}}">Scouts</a></li>
+                  <li ><a class="nav-link" href="{{url_for('admin_allClub')}}">Team</a></li>
+                  <li ><a class="nav-link" href="{{url_for('availablePlayer')}}">Available Player</a></li>
+                </ul>
+              </li>
+              <li class="dropdown ">
+                <a href="#" class="nav-link"><i class="fas fa-cog"></i><span>Edit Profile</span></a>
+              </li>
+            </ul>
+          </aside>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <h1>Update Information</h1>
+          </div>
+          
+          <div class="row">
+
+            <div class="col-12 col-md-4 col-lg-4">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Picture</h4>
+                  <div class="card-header-action">
+                    <input type="file" id="photoFile" accept="image/*" style="display: none;">
+                    <a href="#" id="uploadButton" class="btn btn-primary">Change Photo</a>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="chocolat-parent">
+                    <a href="../static/pictures/profile/{{admin.picture}}" class="chocolat-image" title="{{admin.names}}">
+                      <div data-crop-image="285" style="overflow: hidden; position: relative; height: 285px;">
+                        <img alt="image" src="../static/pictures/profile/{{admin.picture}}" class="img-fluid">
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-8 col-lg-8">
+                <div class="card card-primary my-b-radius">
+                  <div class="card-header"><h4>Admin Update Info</h4>
+                    {%for msg in get_flashed_messages()%} {% if 'successfully' in msg%}
+                    <span style="color:green; margin-left:5px;">{{msg}}</span>{%else%}
+                    <span style="color: red;">{{msg}}</span>
+                    {%endif%} {%endfor%}
+                  </div>
+    
+                  <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                      <div class="row">
+                        <div class="form-group col-6">
+                          <label for="frist_name">Names</label>
+                          <input id="frist_name" type="text" class="form-control" value="{{admin.names}}" name="names" autofocus required>
+                        </div>
+                        <div class="form-group col-6">
+                          <label for="last_name">Phone</label>
+                          <input id="last_name" type="text" class="form-control" name="phone" value="{{admin.phone}}"  required>
+                        </div>
+                      </div>
+  
+                      <div class="form-divider"></div>
+                      
+                      <div class="form-group" style="display:flex; justify-content:space-between ;align-items:end">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                          Update
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+        </section>
+      </div>
+      <footer class="main-footer">
+        <div class="footer-left">
+          Copyright &copy; <span id="theYear"></span>
+          <script>document.getElementById('theYear').innerHTML= new Date().getFullYear()</script>
+        </div>
+        <div class="footer-right">
+          
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="../static/assets/modules/jquery.min.js"></script>
+  <script src="../static/assets/modules/popper.js"></script>
+  <script src="../static/assets/modules/tooltip.js"></script>
+  <script src="../static/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../static/assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="../static/assets/modules/moment.min.js"></script>
+  <script src="../static/assets/js/stisla.js"></script>
+  
+  <!-- JS Libraies -->
+  <script src="../static/assets/modules/simple-weather/jquery.simpleWeather.min.js"></script>
+  <script src="../static/assets/modules/chart.min.js"></script>
+  <script src="../static/assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
+  <script src="../static/assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+  <script src="../static/assets/modules/summernote/summernote-bs4.js"></script>
+  <script src="../static/assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="../static/assets/js/page/index-0.js"></script>
+  <script src="../static/assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+  <script src="../static/assets/modules/jquery-ui/jquery-ui.min.js"></script>
+  
+  <!-- Template JS File -->
+  <script src="../static/assets/js/scripts.js"></script>
+  <script src="../static/assets/js/custom.js"></script>
+ 
+  <script>
+
+    $(document).ready(function() {
+      $('#uploadButton').click(function() {
+          // Trigger click event on the hidden file input
+          $('#photoFile').click();
+      });
+  
+      $('#photoFile').change(function() {
+          var photoFile = this.files[0];
+  
+          if (photoFile) {
+              var formData = new FormData();
+              formData.append('photoFile', photoFile);
+  
+              $.ajax({
+                  url: `/adminUpdatePhoto/${location.pathname.split('/').reverse()[0]}`,
+                  type: 'POST',
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  success: function(response) {
+                      console.log(response)
+                      location.reload()
+                  },
+                  error: function() {
+                      console.err('unable to update photo')
+                  }
+              });
+          }
+      });
+  });
+  
+  </script>
+</body>
+</html>
